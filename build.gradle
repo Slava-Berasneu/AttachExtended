@@ -1,3 +1,10 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
 plugins {
     id 'java-library'
     id "org.openjfx.javafxplugin" version "0.0.10" apply false
@@ -17,20 +24,21 @@ if (System.getProperty('os.name').toLowerCase().contains("mac")) {
     ext.IOS_VERSION = ""
 }
 
-ext.libraryVersions = [attach: '4.0.14']
+ext.libraryVersions = [attach: '4.0.19']
 
 subprojects {
     apply plugin: "org.openjfx.javafxplugin"
     apply from: rootProject.file('gradle/mavenPublish.gradle')
 
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    sourceCompatibility = 17
+    targetCompatibility = 17
 
     repositories {
         mavenCentral()
         maven {
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+        google()
     }
 
     javafx {
@@ -61,3 +69,4 @@ javadoc {
     title "Custom Attach ${project.version} API"
     dependsOn copyModuleSources
 }
+

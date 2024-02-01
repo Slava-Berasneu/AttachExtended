@@ -10,11 +10,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import java.util.concurrent.Executor;
 
-public class AndroidNativeFingerprintService {
+public class DalvikAndroidFingerprintService
+{
 
     private final Context context;
 
-    public AndroidNativeFingerprintService(Context context) {
+    public DalvikAndroidFingerprintService(Context context) {
         this.context = context;
     }
 

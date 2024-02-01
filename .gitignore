@@ -1,2 +1,5 @@
 /.gradle/
 /.idea/
+/modules/fingerprint/build/
+/build/
+/modules/log/build/
