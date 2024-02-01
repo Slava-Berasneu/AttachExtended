@@ -1,0 +1,6 @@
+dependencies {
+    implementation "com.gluonhq.attach:util:$libraryVersions.attach"
+}
+
+ext.moduleName = 'com.gluonhq.attachextended.fingerprint'
+ext.description = 'Common API to access touch id features'

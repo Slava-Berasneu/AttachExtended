@@ -1,0 +1,6 @@
+[
+  {
+    "name" : "com.gluonhq.attachextended.fingerprint.impl.IOSFingerprintService",
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+  }
+]

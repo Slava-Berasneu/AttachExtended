@@ -1,0 +1,6 @@
+[
+  {
+    "name" : "com.gluonhq.attachextended.fingerprint.impl.AndroidFingerprintService",
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+  }
+]

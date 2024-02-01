@@ -1,0 +1,6 @@
+[
+  {
+    "name" : "com.gluonhq.attachextended.fingerprint.impl.DesktopFingerprintService",
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+  }
+]
