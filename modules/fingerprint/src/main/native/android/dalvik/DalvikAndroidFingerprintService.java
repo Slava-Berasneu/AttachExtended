@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import java.util.concurrent.Executor;
 
+import com.gluonhq.attachextended.fingerprint.FingerprintService;
 public class DalvikAndroidFingerprintService
 {
 
@@ -19,7 +20,7 @@ public class DalvikAndroidFingerprintService
         this.context = context;
     }
 
-    public void authenticate(FingerprintAuthenticationCallback callback) {
+    public void authenticate(FingerprintService.FingerprintAuthenticationCallback callback) {
         Executor executor = ContextCompat.getMainExecutor(context);
         BiometricPrompt biometricPrompt = new BiometricPrompt((FragmentActivity) context, executor,
                                                               new BiometricPrompt.AuthenticationCallback() {

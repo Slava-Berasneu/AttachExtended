@@ -28,6 +28,6 @@
 
 /**
  * Primary API package for AttachExtended - Fingerprint service,
- * contains the interface {@link com.gluonhq.attachextended.log.FingerprintService} and related classes.
+ * contains the interface {@link com.gluonhq.attachextended.fingerprint.FingerprintService} and related classes.
  */
 package com.gluonhq.attachextended.fingerprint;
