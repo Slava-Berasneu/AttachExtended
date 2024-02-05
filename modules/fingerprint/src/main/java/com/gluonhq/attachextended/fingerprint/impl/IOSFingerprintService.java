@@ -28,18 +28,37 @@
 package com.gluonhq.attachextended.fingerprint.impl;
 
 import com.gluonhq.attachextended.fingerprint.FingerprintService;
+import com.gluonhq.attachextended.fingerprint.AuthenticationResult;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 
 public class IOSFingerprintService implements FingerprintService {
+
+    private ReadOnlyObjectWrapper<AuthenticationResult> authenticationResultWrapper = new ReadOnlyObjectWrapper<>();
 
     static {
         System.loadLibrary("IOSFingerprintService"); // Load the native library
     }
 
     @Override
-    public void authenticate(FingerprintAuthenticationCallback callback) {
-        authenticateWithFingerprint(callback);
+    public void authenticate() {
+        authenticateWithFingerprint(); // Adapt this method for property-based result handling
     }
 
-    // Native method declaration that will be implemented in the IOS-specific native code
-    private native void authenticateWithFingerprint(FingerprintAuthenticationCallback callback);
+    @Override
+    public ReadOnlyObjectProperty<AuthenticationResult> authenticationResultProperty() {
+        return authenticationResultWrapper.getReadOnlyProperty();
+    }
+
+    // Adapted native method declaration
+    private native void authenticateWithFingerprint();
+
+    // Methods called from native code to update the authentication result
+    private void onAuthenticationSuccess() {
+        authenticationResultWrapper.set(new AuthenticationResult(true, "Authentication Successful"));
+    }
+
+    private void onAuthenticationFailure(String errorMessage) {
+        authenticationResultWrapper.set(new AuthenticationResult(false, errorMessage));
+    }
 }

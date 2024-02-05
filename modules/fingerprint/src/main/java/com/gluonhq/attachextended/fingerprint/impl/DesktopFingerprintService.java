@@ -28,12 +28,23 @@
 package com.gluonhq.attachextended.fingerprint.impl;
 
 import com.gluonhq.attachextended.fingerprint.FingerprintService;
+import com.gluonhq.attachextended.fingerprint.AuthenticationResult;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 
 public class DesktopFingerprintService implements FingerprintService {
 
+    private ReadOnlyObjectWrapper<AuthenticationResult> authenticationResultWrapper = new ReadOnlyObjectWrapper<>(
+            new AuthenticationResult(false, "Desktop fingerprint authentication not supported."));
+
     @Override
-    public void authenticate(FingerprintAuthenticationCallback callback)
-    {
-        //NO-OP
+    public void authenticate() {
+        // Unsupported on desktop
+        authenticationResultWrapper.set(new AuthenticationResult(false, "Fingerprint authentication is not supported on desktop."));
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<AuthenticationResult> authenticationResultProperty() {
+        return authenticationResultWrapper.getReadOnlyProperty();
     }
 }

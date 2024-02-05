@@ -1,7 +1,25 @@
 package com.gluonhq.attachextended.fingerprint;
 
 import com.gluonhq.attach.util.Services;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import java.util.Optional;
+
+/**
+ * The Fingerprint Service can be used as
+ *
+ * FingerprintService.create().ifPresent(service -> {
+ *     service.authenticationResultProperty().addListener((obs, oldResult, newResult) -> {
+ *         if (newResult.isSuccess()) {
+ *             // Handle successful authentication
+ *         } else {
+ *             // Handle authentication failure, possibly using newResult.getMessage()
+ *         }
+ *     });
+ *
+ *     service.authenticate();
+ * });
+ */
 
 public interface FingerprintService {
 
@@ -15,23 +33,23 @@ public interface FingerprintService {
 
     /**
      * Initiates a fingerprint authentication process.
-     *
-     * @param callback A callback to handle the authentication result.
      */
-    void authenticate(FingerprintAuthenticationCallback callback);
+    void authenticate();
 
     /**
-     * Interface for handling the result of fingerprint authentication.
+     * ReadOnlyObjectProperty for authentication result. The property will hold
+     * an AuthenticationResult object which could contain information about
+     * the success or failure of the authentication process.
+     *
+     * @return ReadOnlyObjectProperty for the authentication result.
      */
-    interface FingerprintAuthenticationCallback {
-        /**
-         * Called when authentication is successful.
-         */
-        void onSuccess();
+    ReadOnlyObjectProperty<AuthenticationResult> authenticationResultProperty();
 
-        /**
-         * Called when authentication fails.
-         */
-        void onFailure(String errorMessage);
+    /**
+     * A method to easily access the current value of the authentication result property.
+     * @return The current authentication result.
+     */
+    default AuthenticationResult getAuthenticationResult() {
+        return authenticationResultProperty().get();
     }
 }

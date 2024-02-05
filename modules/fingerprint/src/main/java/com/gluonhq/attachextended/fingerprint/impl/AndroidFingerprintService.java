@@ -28,18 +28,41 @@
 package com.gluonhq.attachextended.fingerprint.impl;
 
 import com.gluonhq.attachextended.fingerprint.FingerprintService;
+import com.gluonhq.attachextended.fingerprint.AuthenticationResult;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 
 public class AndroidFingerprintService implements FingerprintService {
+
+    private ReadOnlyObjectWrapper<AuthenticationResult> authenticationResultWrapper = new ReadOnlyObjectWrapper<>();
 
     static {
         System.loadLibrary("AndroidFingerprintService");
     }
 
     @Override
-    public void authenticate(FingerprintAuthenticationCallback callback) {
-        authenticateWithFingerprint(callback);
+    public void authenticate() {
+        // Assuming authenticateWithFingerprint is adapted to set the result on the property
+        authenticateWithFingerprint();
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<AuthenticationResult> authenticationResultProperty() {
+        return authenticationResultWrapper.getReadOnlyProperty();
     }
 
     // Native method declaration that will be implemented in the Android-specific native code
-    private native void authenticateWithFingerprint(FingerprintAuthenticationCallback callback);
+    // This method should update the authenticationResultWrapper's value based on the authentication outcome
+    private native void authenticateWithFingerprint();
+
+    // This method should be called from the native code to update the authentication result
+    // For example, on successful authentication:
+    private void onAuthenticationSuccess() {
+        authenticationResultWrapper.set(new AuthenticationResult(true, "Authentication Successful"));
+    }
+
+    // And on failure:
+    private void onAuthenticationFailure(String errorMessage) {
+        authenticationResultWrapper.set(new AuthenticationResult(false, errorMessage));
+    }
 }

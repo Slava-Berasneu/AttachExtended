@@ -70,3 +70,8 @@ javadoc {
     dependsOn copyModuleSources
 }
 
+// Do not publish Gradle modules
+tasks.withType(GenerateModuleMetadata) {
+    enabled = false
+}
+

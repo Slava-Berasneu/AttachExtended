@@ -28,6 +28,7 @@
 module com.gluonhq.attachextended.fingerprint {
 
     requires com.gluonhq.attach.util;
+    requires javafx.base;
 
     exports com.gluonhq.attachextended.fingerprint;
     exports com.gluonhq.attachextended.fingerprint.impl to com.gluonhq.attach.util;

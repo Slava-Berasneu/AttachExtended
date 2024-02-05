@@ -1,0 +1,9 @@
+[
+  {
+    "name": "com.gluonhq.attach.fingerprint.impl.IOSFingerprintService",
+    "methods": [
+      {"name": "onAuthenticationSuccess", "parameterTypes": [] },
+      {"name": "onAuthenticationFailure", "parameterTypes": ["java.lang.String"] }
+    ]
+  }
+]
